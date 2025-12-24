@@ -18,6 +18,9 @@ from dataclasses import dataclass #(used to create class variables)
 from src.components.data_transformation import DataTransformation
 from src.components.data_transformation import DataTransformationConfig # Just to check everything is working fine
 
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
+
 
 # In order to implement the dataingestion component there should be some input required
 #for exemple where will I save the train dataset or test dataset or even the raw data 
@@ -113,7 +116,11 @@ if __name__ == "__main__": #This code only runs when you execute this file direc
 
 #So abve we've combined dataingestion then down we've combined DataTransformation
     data_transformation = DataTransformation()  # To initialize (and you'll see that it will be able to call this self.data_transformation_config function)
-    data_transformation.initiate_data_transformation(train_data,test_data)
+    train_arr,test_arr,_ = data_transformation.initiate_data_transformation(train_data,test_data)
+#the third i don't need it cause i've already created the pkl file
 
+model_trainer = ModelTrainer()
+
+print(model_trainer.initiate_model_trainer(train_arr,test_arr))
 
 
